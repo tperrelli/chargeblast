@@ -1,0 +1,8 @@
+# Legibilidade, validação e entrega
+
+- Formate arquivos alterados de forma consistente antes de avaliar limites de linhas. Use um formatter configurado no projeto para TS, TSX, CSS e JSON; se ele ainda não existir, configure-o como parte do cleanup antes de aplicar o padrão em escala. O formatador deve ter versão fixada e um comando de verificação documentado.
+- Busque linhas de até 100 caracteres; quebre imports, assinaturas, objetos, condicionais e props quando necessário. Não quebre strings, URLs, SVGs ou conteúdo cuja divisão prejudique a legibilidade apenas para atingir uma métrica. Evite múltiplas declarações ou blocos JSX na mesma linha.
+- Antes de entregar, revise o diff formatado: procure responsabilidades misturadas, duplicação, dependências espalhadas, nomes vagos, tipagem frouxa, CSS em cascata redundante e controles inacessíveis. Um arquivo curto não é prova de boa estrutura.
+- Teste comportamentos que possam regredir: combinações de filtros, ordenação e paginação, estados vazios, seleção, exportação, navegação e interações por teclado quando afetadas. Prefira testes de comportamento a testes que apenas reproduzem a implementação.
+- Execute lint, testes e build apropriados ao escopo; rode o verificador de formato quando configurado. Não declare interações ou fidelidade visual validadas apenas porque o build ou testes de funções puras passaram. Relate falhas e verificações indisponíveis com precisão.
+- Limite mudanças ao objetivo solicitado, preserve arquivos e alterações existentes e não apague código ou assets sem verificar seu uso. Não reescreva partes alheias apenas para satisfazer uma regra estética.

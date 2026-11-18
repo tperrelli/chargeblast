@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "..",
+    "outDir": "../.test-build",
+    "noEmit": false,
+    "incremental": false
+  },
+  "include": [
+    "*.test.ts",
+    "../features/payments/utils/query-payments.ts",
+    "../features/payments/mock-payments.ts"
+  ]
+}

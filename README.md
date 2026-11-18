@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chargeblast — Payments
 
-## Getting Started
+Aplicação Next.js App Router com uma lista de pagamentos fictícios e uma página de detalhes para cada pagamento. Os 420 registros são gerados de forma determinística em memória; não existe integração com o Stripe nem processamento real de pagamentos.
 
-First, run the development server:
+## Executar
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse `http://localhost:3000`. Use o identificador na tabela para abrir os detalhes e o link de retorno para voltar à lista.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verificação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm test
+npm run build
+```
 
-## Learn More
+Os testes verificam filtros combinados, intervalos de data, ordenação, paginação e busca por identificador. As datas são exibidas e filtradas em UTC. Os valores são comparados na moeda original, sem conversão entre moedas.
 
-To learn more about Next.js, take a look at the following resources:
+## Organização
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/`: rotas e composição de Server Components.
+- `components/`: apresentação, tabela, filtros e detalhes.
+- `hooks/`: estado e coordenação da tabela.
+- `utils/`: filtragem, ordenação, paginação e formatação.
+- `lib/`: dados fictícios e horário de referência da requisição.
+- `rules/`: padrões de arquitetura, React e TypeScript adotados pelo projeto.

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8989",
     "lint": "eslint",
     "test": "tsc -p tests/tsconfig.json && node --test .test-build/tests/*.test.js && node --import ./tests/setup-dom.mjs --import tsx --test tests/*.test.tsx",
     "format": "prettier --write \"app/**/*.{ts,tsx,css}\" \"components/**/*.{ts,tsx}\" \"features/**/*.{ts,tsx,css}\" \"lib/**/*.ts\" \"tests/**/*.{ts,tsx,json,mjs}\" \"*.{json,mjs,ts}\"",

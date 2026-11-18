@@ -16,4 +16,8 @@ for (const name of [
   Object.defineProperty(globalThis, name, { value: dom.window[name], configurable: true });
 }
 Object.defineProperty(globalThis, "self", { value: dom.window, configurable: true });
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", { value: true, configurable: true, writable: true });
+Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
+  value: true,
+  configurable: true,
+  writable: true,
+});

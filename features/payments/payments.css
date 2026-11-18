@@ -233,6 +233,10 @@
   border-radius: 5px;
   color: #4f566b;
 }
+.page-button:hover:not(:disabled) {
+  background: #f7f9fc;
+  border-color: #c5cbd6;
+}
 .page-button:disabled {
   color: #c5cbd6;
   cursor: default;

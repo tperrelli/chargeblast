@@ -24,4 +24,5 @@ Read and apply the frontend rules in `rules/01-architecture.md`, `rules/02-react
 - `npm run dev` starts the development server.
 - `npm run build` creates a production build; `npm run start` serves it.
 - `npm run lint` runs ESLint.
+- `npm run format` formats project code; `npm run format:check` verifies formatting.
 - `npm test` runs the payment logic tests.

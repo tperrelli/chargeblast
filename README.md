@@ -14,18 +14,19 @@ Acesse `http://localhost:3000`. Use o identificador na tabela para abrir os deta
 ## Verificação
 
 ```bash
+npm run format:check
 npm run lint
 npm test
 npm run build
 ```
 
-Os testes verificam filtros combinados, intervalos de data, ordenação, paginação e busca por identificador. As datas são exibidas e filtradas em UTC. Os valores são comparados na moeda original, sem conversão entre moedas.
+Use `npm run format` para formatar o código. Os testes cobrem filtros combinados, ordenação, paginação, seleção, cópia, exportação e interação dos menus por teclado. As datas são exibidas e filtradas em UTC; os valores são comparados na moeda original, sem conversão.
 
 ## Organização
 
 - `app/`: rotas e composição de Server Components.
-- `components/`: apresentação, tabela, filtros e detalhes.
-- `hooks/`: estado e coordenação da tabela.
-- `utils/`: filtragem, ordenação, paginação e formatação.
-- `lib/`: dados fictícios e horário de referência da requisição.
-- `rules/`: padrões de arquitetura, React e TypeScript adotados pelo projeto.
+- `features/payments/`: componentes, hooks, tipos, dados fictícios, estilos e regras de pagamentos.
+- `components/`: estrutura e ícones compartilhados.
+- `lib/`: funções de infraestrutura compartilhadas.
+- `tests/`: testes de lógica e de interface.
+- `rules/`: padrões de arquitetura, React, TypeScript e design adotados pelo projeto.

@@ -255,8 +255,7 @@ kbd {
   white-space: nowrap;
   box-shadow: 0 1px 2px #1a1f3608;
 }
-.button:hover,
-.page-button:hover:not(:disabled) {
+.button:hover {
   background: #f7f9fc;
   border-color: #c5cbd6;
 }

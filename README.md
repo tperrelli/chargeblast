@@ -1,90 +1,90 @@
 # Chargeblast — Payments
 
-Implementação da tela **Transactions → Payments**, inspirada no Stripe Dashboard e na [referência visual](stripe-mockup.png) fornecida para o desafio. A aplicação permite explorar pagamentos, combinar filtros e consultar os detalhes de cada transação.
+An implementation of the **Transactions → Payments** screen, inspired by the Stripe Dashboard and the [visual reference](stripe-mockup.png) supplied for the challenge. The application lets users explore payments, combine filters, and view transaction details.
 
-Os dados são fictícios e locais: não há conexão com a API do Stripe, autenticação, banco de dados ou processamento de pagamentos.
+All data is fictional and local. There is no Stripe API integration, authentication, database, or payment processing.
 
-## Como executar
+## Getting started
 
-**Pré-requisitos:** Node.js 20.9 ou superior e npm. Nenhuma variável de ambiente ou credencial é necessária.
+**Requirements:** Node.js 20.9 or later and npm. No environment variables or credentials are required.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000). Se a porta estiver ocupada, o Next.js informa a porta utilizada no terminal.
+Open [http://localhost:3000](http://localhost:3000). If the port is occupied, Next.js reports the port it uses in the terminal.
 
-Para executar a versão de produção:
+To run a production build:
 
 ```bash
 npm run build
 npm run start
 ```
 
-O comando de produção deste projeto utiliza a porta **8989**: [http://localhost:8989](http://localhost:8989).
+The production start command uses port **8989**: [http://localhost:8989](http://localhost:8989).
 
-## Funcionalidades
+## Features
 
-- **Tabela de pagamentos:** valor e moeda, status, método, descrição, cliente, data de criação, data de reembolso, motivo de recusa e ID. Para acessar o ID quando necessário, role a tabela horizontalmente.
-- **Busca:** em **More filters**, por ID completo ou parcial, e-mail ou últimos quatro dígitos.
-- **Filtros combináveis:** período (`Today`, `7 days`, `30 days` e `Custom`), múltiplos status, métodos e moedas, além de valor mínimo e máximo. **Clear filters** restaura a visualização inicial.
-- **Ordenação:** clique em **Amount** ou **Date**; a ordenação por status fica no filtro **Status**. É possível combinar critérios em ordem de prioridade; cada acionamento alterna entre crescente, decrescente e sem ordenação.
-- **Paginação:** 25, 50 ou 100 linhas por página. Filtros e ordenação são aplicados antes da paginação.
-- **Detalhes:** abra o ID ou o menu de ações da linha para acessar `/payments/[id]`. A página apresenta dados do pagamento, cliente e atividade; IDs desconhecidos exibem a página de pagamento não encontrado.
-- **Seleção e CSV:** selecione linhas individualmente ou por página. **Export** baixa os pagamentos selecionados; sem seleção, exporta todos os resultados filtrados, inclusive os de outras páginas.
-- **Colunas:** **Edit columns** permite mostrar ou ocultar descrição, cliente, data de reembolso e motivo de recusa. As colunas essenciais continuam disponíveis.
+- **Payments table:** amount and currency, status, payment method, description, customer, creation date, refund date, decline reason, and ID. Scroll horizontally to reach the ID when needed.
+- **Search:** use **More filters** to search by full or partial payment ID, email address, or last four digits.
+- **Combinable filters:** date range (`Today`, `7 days`, `30 days`, or `Custom`), multiple statuses, methods, and currencies, plus minimum and maximum amounts. **Clear filters** restores the initial view.
+- **Sorting:** click **Amount** or **Date**; status sorting is available in the **Status** filter. Multiple criteria can be combined in priority order. Each activation cycles through ascending, descending, and no sort.
+- **Pagination:** 25, 50, or 100 rows per page. Filtering and sorting happen before pagination.
+- **Details:** open the ID or the row action menu to visit `/payments/[id]`. The page shows payment details, customer information, and activity. Unknown IDs show a payment-not-found page.
+- **Selection and CSV:** select individual rows or an entire page. **Export** downloads selected payments; if none are selected, it exports all filtered results across pages.
+- **Columns:** **Edit columns** shows or hides description, customer, refund date, and decline reason. Essential columns remain available.
 
-A interface inclui estado sem resultados, cópia do ID, tempo relativo na data, navegação por teclado e fechamento de menus com `Escape` ou clique externo.
+The interface also provides an empty state, ID copying, relative time on dates, keyboard navigation, and menu dismissal with `Escape` or an outside click.
 
-## Dados e decisões
+## Data and decisions
 
-O conjunto contém **420 pagamentos determinísticos**, gerados em memória com uma semente fixa. Os mesmos IDs e valores são reproduzidos a cada inicialização. Há exemplos de `Card`, `ACH` e `Wallet`, cinco moedas e os status `Succeeded`, `Pending`, `Failed`, `Refunded`, `Canceled` e `Blocked`.
+The dataset contains **420 deterministic payments**, generated in memory with a fixed seed. IDs and values remain consistent across restarts. It includes `Card`, `ACH`, and `Wallet` payments, five currencies, and the statuses `Succeeded`, `Pending`, `Failed`, `Refunded`, `Canceled`, and `Blocked`.
 
-As datas da amostra estão entre **9 de setembro e 18 de novembro de 2026**. Por isso, filtros relativos como `Today` podem retornar zero resultados quando a aplicação for avaliada em outra data. Para testar um intervalo com resultados, selecione **Custom** e use datas dentro desse período.
+Sample dates range from **September 9 to November 18, 2026**. Relative filters such as `Today` may therefore return no results when the application is reviewed on another date. To try a range with results, select **Custom** and choose dates within that period.
 
-- Datas, limites dos períodos e horários apresentados usam **UTC**. O tempo relativo usa o horário de referência recebido do servidor no carregamento da página.
-- Valores de moedas diferentes são filtrados e ordenados pelo número na moeda original, **sem conversão cambial**.
-- O CSV inclui um conjunto fixo de campos, independentemente das colunas visíveis. Valores que começam com caracteres de fórmula são prefixados para reduzir o risco de execução em planilhas.
-- Filtros, ordenação, seleção e colunas são mantidos em memória no cliente; não são persistidos na URL ou entre recarregamentos.
+- Dates, period boundaries, and displayed times use **UTC**. Relative time uses the server-provided reference time from the page load.
+- Amounts in different currencies are filtered and sorted by their numeric value in the original currency, **without currency conversion**.
+- CSV export contains a fixed set of fields regardless of visible columns. Values beginning with formula characters are prefixed to reduce spreadsheet formula-injection risk.
+- Filters, sorting, selection, and columns are stored in client memory; they do not persist in the URL or across reloads.
 
-## Arquitetura
+## Architecture
 
-A aplicação utiliza **Next.js 16, App Router, React 19 e TypeScript**. As rotas e a estrutura estática são Server Components; a tabela interativa é um Client Component. Com Cache Components habilitado, o horário inicial é obtido por requisição e enviado ao cliente para manter filtros e hidratação coerentes.
+The application uses **Next.js 16, App Router, React 19, and TypeScript**. Routes and the static shell are Server Components; the interactive table is a Client Component. With Cache Components enabled, the initial timestamp is obtained per request and passed to the client to keep filtering and hydration consistent.
 
 ```text
-app/                         Rotas, layout e estilos globais
-components/                  Estrutura e ícones compartilhados
+app/                         Routes, layout, and global styles
+components/                  Shared shell and icons
 features/payments/
-  components/                Tabela, filtros, ações e detalhes
-  hooks/                     Estado e comportamentos interativos
-  utils/                     Filtragem, ordenação, paginação, formatação e CSV
-  types.ts                   Tipos e opções do domínio
-  mock-payments.ts           Geração e consulta dos dados fictícios
-  payments.css               Estilos da feature
-lib/request-time.ts          Horário de referência por requisição
-tests/                       Testes de lógica e de interface
-rules/                       Padrões de arquitetura, código e design
+  components/                Table, filters, actions, and details
+  hooks/                     State and interactive behavior
+  utils/                     Filtering, sorting, pagination, formatting, and CSV
+  types.ts                   Domain types and options
+  mock-payments.ts           Fictional data generation and lookup
+  payments.css               Feature styles
+lib/request-time.ts          Per-request reference time
+tests/                       Logic and interface tests
+rules/                       Architecture, code, and design conventions
 ```
 
-A filtragem, a ordenação e a paginação são feitas no cliente, uma escolha adequada ao volume limitado de dados do desafio. Em uma aplicação com dados reais e maior volume, essas operações deveriam ser transferidas para o servidor, com paginação e autorização adequadas.
+Filtering, sorting, and pagination run on the client, which is appropriate for the challenge's limited dataset. With real data and larger volumes, these operations should move to the server with appropriate pagination and authorization.
 
-## Verificação
+## Verification
 
 ```bash
-npm run format:check   # Formatação com Prettier
+npm run format:check   # Prettier formatting check
 npm run lint           # ESLint
-npm test               # Testes de lógica e de interface
-npm run build          # Build de produção
+npm test               # Logic and interface tests
+npm run build          # Production build
 ```
 
-Neste ambiente, o build padrão com Turbopack foi bloqueado pela restrição de abertura de porta local; `npx next build --webpack` foi executado com sucesso.
+In this environment, the default Turbopack build was blocked by a restriction on opening a local port; `npx next build --webpack` completed successfully.
 
-Use `npm run format` para aplicar a formatação. Os testes cobrem filtros combinados, datas, ordenação, paginação, seleção, cópia, CSV e interações dos menus. Os testes de interface usam JSDOM; eles **não substituem** uma inspeção visual e funcional em um navegador real.
+Run `npm run format` to apply formatting. Tests cover combined filters, dates, sorting, pagination, selection, copying, CSV export, and menu interactions. Interface tests use JSDOM; they **do not replace** visual and functional inspection in a real browser.
 
-## Limitações
+## Limitations
 
-- A barra superior e as demais seções da navegação são ilustrativas; não implementam busca global, conta ou outras áreas do dashboard.
-- A atividade dos detalhes é derivada dos dados fictícios e não representa um histórico real de eventos do Stripe.
-- Não há filtros compartilháveis por URL, reordenação ou redimensionamento de colunas por arraste.
-- A comparação visual lado a lado em navegador não foi concluída neste ambiente. A imagem fornecida é uma referência da tabela, não uma captura da implementação.
+- The top bar and other navigation sections are illustrative; global search, account management, and other dashboard areas are not implemented.
+- The activity shown on the details page is derived from fictional data and does not represent a real Stripe event history.
+- Shareable URL filters, drag-and-drop column reordering, and column resizing are not implemented.
+- A side-by-side visual comparison in a browser was not completed in this environment. The supplied image is a reference for the table, not a screenshot of this implementation.

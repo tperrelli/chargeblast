@@ -1,21 +1,21 @@
-# Arquitetura e organização
+# Architecture and organization
 
-- Use App Router e leia a documentação instalada de Next.js indicada em `AGENTS.md` antes de escrever código. Mantenha páginas focadas em obter dados, compor a tela e definir os limites entre servidor e cliente.
-- Prefira Server Components. Coloque `"use client"` no menor ponto de entrada que precisa de estado, eventos ou APIs do navegador; não transforme uma página inteira em componente cliente por conveniência.
-- Organize código por domínio: mantenha componentes, hooks, tipos, dados e funções usados apenas por uma feature próximos entre si. Deixe em diretórios compartilhados apenas o que tem uso real em mais de uma feature. Não mova arquivos sem necessidade em alterações localizadas.
-- Para uma tela complexa, esta é a estrutura de referência; subdivida por responsabilidade, sem criar arquivos ou camadas vazias por obrigação:
+- Use the App Router and read the installed Next.js documentation referenced in `AGENTS.md` before writing code. Keep pages focused on obtaining data, composing the screen, and defining server/client boundaries.
+- Prefer Server Components. Place `"use client"` at the smallest entry point that needs state, events, or browser APIs; do not turn an entire page into a Client Component for convenience.
+- Organize code by domain: keep components, hooks, types, data, and functions used by one feature together. Put code in shared directories only when it is actually used by multiple features. Do not move files unnecessarily for localized changes.
+- For a complex screen, use this structure as a reference. Split by responsibility without creating empty files or layers just to satisfy the layout:
 
 ```text
-app/<rota>/page.tsx                 # entrada e composição da rota
+app/<route>/page.tsx                # route entry point and composition
 features/<feature>/
-  components/                       # tabela, filtros e componentes próprios
-  hooks/                            # estado e coordenação de interações
-  utils/                            # regras e transformações puras
-  types.ts                          # contratos do domínio, quando necessário
-components/                         # componentes realmente compartilhados
+  components/                       # feature-specific table, filters, and components
+  hooks/                            # state and interaction coordination
+  utils/                            # pure rules and transformations
+  types.ts                          # domain contracts, when needed
+components/                         # genuinely shared components
 ```
 
-- Filtragem, ordenação, paginação, exportação e regras de negócio pertencem a funções puras ou hooks, não à marcação. Separe acesso a dados, regras e apresentação. Um componente de composição pode coordenar props e eventos simples, mas não deve concentrar toda a feature.
-- Cada arquivo deve ter uma responsabilidade reconhecível pelo nome. Evite `helpers`, `utils`, `common` ou `data` como depósitos genéricos; prefira nomes que descrevam o domínio e a operação. Evite abstrações genéricas para um único caso quando uma função ou componente local for mais claro.
-- Mantenha componentes com até 120 linhas após formatação legível; a tabela principal deve ter menos de 100 linhas. Divida por responsabilidade antes de ultrapassar o limite. Nunca comprima JSX, CSS ou funções para cumprir a contagem, nem crie componentes triviais apenas para reduzir linhas.
-- Durante um cleanup, preserve contratos e comportamento; mova uma responsabilidade por vez, remova código sem uso e execute as verificações relevantes a cada mudança estrutural.
+- Filtering, sorting, pagination, exporting, and business rules belong in pure functions or hooks, not markup. Separate data access, rules, and presentation. A composition component may coordinate simple props and events, but should not contain the entire feature.
+- Each file should have a responsibility recognizable from its name. Avoid using `helpers`, `utils`, `common`, or `data` as generic dumping grounds; prefer names that describe the domain and operation. Avoid generic abstractions for a single case when a local function or component is clearer.
+- Keep components at or below 120 lines after readable formatting; the main table must be under 100 lines. Split by responsibility before exceeding the limit. Never compress JSX, CSS, or functions to satisfy the line count, and do not create trivial components solely to reduce it.
+- During a cleanup, preserve contracts and behavior; move one responsibility at a time, remove unused code, and run relevant checks after each structural change.

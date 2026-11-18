@@ -1,61 +1,61 @@
-# Projeto Chargeblast: tela de pagamentos do Stripe
+# Chargeblast project: Stripe payments screen
 
-Implemente neste repositório a tela **Transactions → Payments** do Stripe Dashboard, seguindo os requisitos abaixo. Trabalhe até concluir os requisitos obrigatórios e validar o resultado.
+Implement the Stripe Dashboard **Transactions → Payments** screen in this repository, following the requirements below. Continue until the mandatory requirements are complete and the result has been validated.
 
-## Antes de implementar
+## Before implementation
 
-- Leia o `AGENTS.md` e as partes relevantes da documentação da versão instalada do Next.js em `node_modules/next/dist/docs/` antes de escrever código. Respeite as convenções e a estrutura existentes no projeto.
-- Use a captura de referência fornecida com o desafio como fonte principal para a aparência. Reproduza o mais fielmente possível os textos, ícones, cores, tipografia, dimensões, espaçamentos e estados de interação.
-- Se a captura não estiver disponível no repositório ou na conversa, informe essa limitação. Prossiga com o trabalho possível sem afirmar que houve correspondência visual com uma referência que não foi fornecida.
-- Se houver acesso ao Stripe Dashboard em modo de teste, ele pode ser usado para consultar interações e medidas; não dependa da criação de uma conta para entregar a implementação.
+- Read `AGENTS.md` and the relevant documentation for the installed Next.js version in `node_modules/next/dist/docs/` before writing code. Respect the project's existing conventions and structure.
+- Use the reference screenshot supplied with the challenge as the primary source for appearance. Reproduce text, icons, colors, typography, dimensions, spacing, and interaction states as closely as possible.
+- If the screenshot is not available in the repository or conversation, report that limitation. Continue with the work that can be done without claiming visual correspondence to an unavailable reference.
+- If test-mode access to the Stripe Dashboard is available, it may be used to inspect interactions and measurements; do not depend on creating an account to deliver the implementation.
 
-## Escopo obrigatório
+## Mandatory scope
 
-A tabela de pagamentos é o único elemento visual obrigatório. Use Next.js com TypeScript, conforme a estrutura do projeto.
+The payments table is the only mandatory visual element. Use Next.js with TypeScript, following the project's structure.
 
-### Colunas
+### Columns
 
-- **Payment ID:** identificador abreviado e ação para copiar o identificador completo.
-- **Customer:** identificação do cliente.
-- **Amount:** valor formatado com sua moeda.
-- **Status:** badge para `Succeeded`, `Pending`, `Failed` ou `Refunded`.
-- **Payment method:** método de pagamento; para cartões, exiba a bandeira e os últimos quatro dígitos.
-- **Created:** data e hora, com o tempo relativo em tooltip ao passar o mouse.
+- **Payment ID:** abbreviated identifier and an action to copy the full identifier.
+- **Customer:** customer identification.
+- **Amount:** amount formatted with its currency.
+- **Status:** badge for `Succeeded`, `Pending`, `Failed`, or `Refunded`.
+- **Payment method:** payment method; for cards, show the brand and last four digits.
+- **Created:** date and time, with relative time in a tooltip on hover.
 
-### Interações e filtros
+### Interactions and filters
 
-- Permita ordenar por data, valor e status, em uma ou mais colunas.
-- Implemente paginação com opções de 25, 50 e 100 linhas por página; processamento no cliente é suficiente.
-- Filtre por período, com `Today`, `7 days`, `30 days` e `Custom`.
-- Filtre por status com seleção múltipla.
-- Filtre por método de pagamento com seleção múltipla, incluindo exemplos como `Card`, `ACH` e `Wallet`.
-- Filtre por faixa de valor.
-- Busque por payment ID, e-mail ou últimos quatro dígitos.
-- Faça os filtros funcionarem em conjunto com a ordenação e a paginação, com um estado útil quando não houver resultados.
+- Allow sorting by date, amount, and status, using one or more columns.
+- Implement pagination with 25, 50, and 100 rows per page; client-side processing is sufficient.
+- Filter by period with `Today`, `7 days`, `30 days`, and `Custom`.
+- Filter by status with multiple selection.
+- Filter by payment method with multiple selection, including examples such as `Card`, `ACH`, and `Wallet`.
+- Filter by amount range.
+- Search by payment ID, email, or last four digits.
+- Make filters work together with sorting and pagination, with a useful empty state when there are no results.
 
-### Dados fictícios
+### Fictional data
 
-- Crie entre 300 e 1.000 pagamentos em um arquivo JSON local ou serviço em memória.
-- Use valores realistas, várias moedas e uma mistura de status e métodos de pagamento.
-- Mantenha os dados consistentes entre recarregamentos para facilitar a avaliação das interações.
+- Create between 300 and 1,000 payments in a local JSON file or in-memory service.
+- Use realistic values, multiple currencies, and a mix of statuses and payment methods.
+- Keep data consistent across reloads to make interactions easier to evaluate.
 
-## Extras opcionais
+## Optional extras
 
-Implemente apenas depois dos requisitos obrigatórios, seguindo esta ordem de preferência:
+Implement these only after the mandatory requirements, in this order of preference:
 
-1. Sidebar com as seções `Payments`, `Customers`, `Balances` e `Product catalog`.
-2. Barra superior com busca e menu da conta.
-3. Página de detalhes do pagamento em rota própria, com timeline de eventos e metadados.
-4. Filtros salvos ou persistidos na URL para compartilhar links.
-5. Redimensionamento e reordenação de colunas por arraste.
-6. Exportação CSV da visualização atual.
+1. Sidebar with `Payments`, `Customers`, `Balances`, and `Product catalog` sections.
+2. Top bar with search and an account menu.
+3. Payment details page on its own route, with an event timeline and metadata.
+4. Saved filters or filters persisted in the URL for sharing links.
+5. Column resizing and drag-and-drop reordering.
+6. CSV export of the current view.
 
-## Qualidade e entrega
+## Quality and delivery
 
-- Priorize a fidelidade visual e o funcionamento completo dos requisitos obrigatórios. Cuide da acessibilidade, dos estados de interação e da adaptação a telas menores.
-- Execute as verificações apropriadas ao projeto e corrija os problemas encontrados.
-- Ao concluir, informe o que foi implementado, como foi validado e quaisquer limitações ou extras pendentes.
+- Prioritize visual fidelity and complete functionality for the mandatory requirements. Address accessibility, interaction states, and smaller screens.
+- Run the checks appropriate to the project and fix any issues found.
+- On completion, report what was implemented, how it was validated, and any limitations or outstanding extras.
 
-## Contexto do desafio
+## Challenge context
 
-O prazo informado é o fim do dia **20 de novembro de 2026**, no horário de Brasília. O documento também pede que o candidato responda ao e-mail de recebimento; isso é uma ação separada e não deve ser executada sem instrução explícita.
+The stated deadline is the end of the day on **November 20, 2026**, Brasília time. The document also asks the candidate to reply to the receipt email; that is a separate action and must not be performed without an explicit instruction.

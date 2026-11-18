@@ -1,8 +1,8 @@
-# Sistema visual e referência
+# Visual system and reference
 
-- Quando houver referência, trate-a como especificação: confira ordem, conteúdo, hierarquia, dimensões, espaçamento, tipografia, cores, bordas, estados e comportamento responsivo. Registre qualquer diferença necessária por conflito com requisitos funcionais.
-- Faça inspeção visual da implementação renderizada no navegador, no viewport da referência e em telas menores. Compare com a imagem, ajuste diferenças perceptíveis e verifique estados de hover, foco, menus, seleção e vazio. Se a inspeção não for possível, relate a limitação; não declare fidelidade visual validada.
-- Centralize cores, espaçamentos, tipografia, raios e dimensões reutilizados em tokens nomeados, derivados do design. Preserve medidas específicas da referência quando necessário; não imponha uma escala que altere o visual.
-- Mantenha estilos de feature próximos dela e limite estilos globais a base, tokens e primitivas compartilhadas. Evite seletores globais amplos para componentes, dependência frágil de `nth-child` e múltiplos arquivos sobrescrevendo o mesmo seletor sem necessidade.
-- Formate CSS com uma declaração por linha e blocos legíveis. Remova regras obsoletas, duplicadas ou sobrescritas na mesma alteração; não acumule correções no fim do arquivo. Preserve os estados acessíveis e a rolagem em telas menores.
-- Não apresente controles decorativos como funcionais: use ações reais ou sinalize claramente a indisponibilidade. Preserve o conteúdo e os nomes da referência, sem inventar dados apresentados como fatos.
+- When a reference is available, treat it as a specification: check order, content, hierarchy, dimensions, spacing, typography, colors, borders, states, and responsive behavior. Document any differences required by conflicting functional requirements.
+- Visually inspect the rendered implementation in a browser at the reference viewport and on smaller screens. Compare it with the image, adjust noticeable differences, and check hover, focus, menus, selection, and empty states. If inspection is not possible, report the limitation; do not claim visual fidelity was validated.
+- Centralize reused colors, spacing, typography, radii, and dimensions in named tokens derived from the design. Preserve reference-specific measurements when necessary; do not impose a scale that changes the visual result.
+- Keep feature styles close to the feature and limit global styles to the base, tokens, and shared primitives. Avoid broad global selectors for components, fragile `nth-child` dependencies, and multiple files overriding the same selector unnecessarily.
+- Format CSS with one declaration per line and readable blocks. Remove obsolete, duplicate, or overridden rules in the same change; do not accumulate fixes at the end of a file. Preserve accessible states and scrolling on smaller screens.
+- Do not present decorative controls as functional: provide real actions or clearly indicate unavailability. Preserve reference content and names without inventing data presented as fact.
